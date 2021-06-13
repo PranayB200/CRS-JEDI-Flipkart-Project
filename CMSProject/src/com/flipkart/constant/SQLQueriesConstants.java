@@ -15,7 +15,7 @@ public class SQLQueriesConstants {
 	public static final String ADD_USER_QUERY = "insert into User(userId, name, password, role, gender, address, country) values (?, ?, ?, ?, ?, ?, ?)";
 	public static final String ADD_PROFESSOR_QUERY = "insert into Professor(userId, department, designation) values (?, ?, ?)";
 	public static final String ASSIGN_COURSE_QUERY = "update Course set professorId = (select professorId from professor where userId = ?) where courseCode = ?";
-	public static final String VIEW_COURSE_QUERY = "select courseCode, courseName, professorId from Course where professorId = ?";
+	public static final String VIEW_COURSE_QUERY = "select courseCode, courseName, professorId from Course";
 	
 	public static final String ADD_STUDENT="insert into student (userId,branchName,batch,isApproved) values (?,?,?,?)";
 	public static final String VERIFY_CREDENTIALS="select password from user where userId = ?";
