@@ -143,8 +143,7 @@ public class ProfessorCRSMenu {
 		}
 		catch(GradeNotAddedException ex)
 		{
-			System.out.println("Grade cannot be added for"+ex.getStudentId());
-			
+			System.out.println("Grade cannot be added for"+ex.getStudentId());			
 		}
 	
 	}
