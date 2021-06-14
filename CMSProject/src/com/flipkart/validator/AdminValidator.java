@@ -9,7 +9,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 
 /**
- * @author Rag_Patel
+ * @author JEDI-04-G3
  * Class for Admin Validator 
  */
 public class AdminValidator {

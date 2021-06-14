@@ -4,7 +4,7 @@ import com.flipkart.constant.NotificationType;
 
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Class that sends notification for different events
  *
  */

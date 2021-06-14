@@ -13,7 +13,7 @@ import com.flipkart.exception.SeatNotAvailableException;
 
 /**
  * 
- * @author JDI-03
+ * @author JEDI-04-G3
  * Interface for Registration Operation
  */
 public interface RegistrationInterface {

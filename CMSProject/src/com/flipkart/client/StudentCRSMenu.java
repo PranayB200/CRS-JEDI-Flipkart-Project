@@ -24,7 +24,7 @@ import com.flipkart.service.RegistrationOperation;
 
 /**
  * 
- * @author mehul
+ * @author JEDI-04-G3
  *  The class displays the menu for student client
  *  
  */
@@ -48,13 +48,14 @@ public class StudentCRSMenu {
 			logger.info("*****************************");
 			logger.info("**********Student Menu*********");
 			logger.info("*****************************");
-			logger.infon("1. Course Registration");
+			logger.info("1. Course Registration");
 			logger.info("2. Add Course");
 			logger.info("3. Drop Course");
 			logger.info("4. View Course");
 			logger.info("5. View Registered Courses");
 			logger.info("6. View grade card");
-			logger.info("7. Logout");
+			logger.info("7. Make Payment");
+			logger.info("8. Logout");
 			logger.info("*****************************");
 
 			int choice = sc.nextInt();
@@ -85,7 +86,11 @@ public class StudentCRSMenu {
 						viewGradeCard(studentId);
 						break;
 						
-				case 7: 
+				case 7:
+					make_payment(studentId);
+					break;
+					
+				case 8: 
 						CRSApplication.loggedin = false;
 						return;
 						
@@ -268,7 +273,7 @@ public class StudentCRSMenu {
 		}
 		
 
-		System.out.println(String.format("%-20s %-20s %-20s %-20s","COURSE CODE", "COURSE NAME", "INSTRUCTOR", "SEATS"));
+		logger.info(String.format("%-20s %-20s %-20s %-20s","COURSE CODE", "COURSE NAME", "INSTRUCTOR", "SEATS"));
 		for(Course obj : course_available)
 		{
 			logger.info(String.format("%-20s %-20s %-20s %-20s",obj.getCourseCode(), obj.getCourseName(),obj.getInstructorId(), obj.getSeats()));
@@ -302,7 +307,7 @@ public class StudentCRSMenu {
 			return null;
 		}
 		
-		System.out.println(String.format("%-20s %-20s %-20s","COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
+		logger.info(String.format("%-20s %-20s %-20s","COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
 		
 		for(Course obj : course_registered)
 		{
@@ -353,10 +358,10 @@ public class StudentCRSMenu {
 	private void make_payment(int studentId)
 	{
 		
-		double fee =0.0;
+		double fee = 0.0;
 		try
 		{
-			registrationInterface.calculateFee(studentId);
+			fee = registrationInterface.calculateFee(studentId);
 		} 
 		catch (SQLException e) 
 		{
@@ -403,7 +408,7 @@ public class StudentCRSMenu {
 					}
 					
 					logger.info("Your Payment is successful");
-					logger.info("Your transaction id : " + notify.getReferenceId());
+					
 				}
 					
 			}

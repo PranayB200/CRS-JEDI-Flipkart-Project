@@ -8,7 +8,7 @@ import com.flipkart.constant.NotificationType;
 
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Interface for Notification Dao Operations
  * Used for adding the notification to the database
  *

@@ -14,7 +14,7 @@ import com.flipkart.service.ProfessorOperation;
 
 /**
  * 
- * @author mehul
+ * @author JEDI-04-G3
  * Class that display Professor Client Menu
  * 
  */

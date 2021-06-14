@@ -14,7 +14,7 @@ import com.flipkart.service.UserInterface;
 
 /**
  * 
- * @author mehul
+ * @author JEDI-04-G3
  * This class is used as the main entry point of the application
  * In main menu to login, register are displayed
  * 
@@ -97,7 +97,7 @@ public class CRSApplication {
 		try
 		{
 			logger.info("-----------------Login------------------");
-			logger.info("Email:");
+			logger.info("ID:");
 			userId=sc.next();
 			logger.info("Password:");
 			password=sc.next();
@@ -107,17 +107,18 @@ public class CRSApplication {
 			//true->role->student->approved
 			if(loggedin)
 			{
-				logger.info("Logged In!");
-				//System.out.println("Welcome "+userId);
+				//logger.info("Welcome "+userId);
 				String role=userInterface.getRole(userId);
 				Role userRole=Role.stringToName(role);
 				switch(userRole)
 				{
 				case ADMIN:
+					logger.info("Logged In!");
 					AdminCRSMenu adminMenu=new AdminCRSMenu();
 					adminMenu.createMenu();
 					break;
 				case PROFESSOR:
+					logger.info("Logged In!");
 					ProfessorCRSMenu professorMenu=new ProfessorCRSMenu();
 					professorMenu.createMenu(userId);
 					
@@ -130,6 +131,7 @@ public class CRSApplication {
 					// To be debugged later.
 					if(isApproved)
 					{
+						logger.info("Logged In!");
 						StudentCRSMenu studentMenu=new StudentCRSMenu();
 						studentMenu.create_menu(studentId);
 						
@@ -172,7 +174,7 @@ public class CRSApplication {
 			logger.info("---------------Student Registration-------------");
 			logger.info("Name:");
 			name=sc.nextLine();
-			logger.info("Email:");
+			logger.info("ID:");
 			userId=sc.next();
 			logger.info("Password:");
 			password=sc.next();
@@ -208,7 +210,7 @@ public class CRSApplication {
 		try
 		{
 			logger.info("------------------Update Password--------------------");
-			logger.info("Email");
+			logger.info("ID");
 			userId=sc.next();
 			logger.info("New Password:");
 			newPassword=sc.next();

@@ -19,7 +19,7 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author sameer
+ * @author JEDI-04-G3
  * Class to implement Student Dao Operations
  *
  */
@@ -76,13 +76,12 @@ public class StudentDaoOperation implements StudentDaoInterface {
 			if(rowsAffected==1)
 			{
 				//add the student record
-				//"insert into student (userId,branchName,batch,isApproved) values (?,?,?,?)";
+				//"insert into student (userId,branchName,batch,isApproved) values (?,?,?)";
 				PreparedStatement preparedStatementStudent;
 				preparedStatementStudent=connection.prepareStatement(SQLQueriesConstants.ADD_STUDENT);
 				preparedStatementStudent.setString(1,student.getUserId());
 				preparedStatementStudent.setString(2, student.getBranchName());
 				preparedStatementStudent.setInt(3, student.getBatch());
-				preparedStatementStudent.setBoolean(4, false);
 				preparedStatementStudent.executeUpdate();
 			}
 			
@@ -96,7 +95,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				System.out.println(e.getMessage()+"SQL error");
+				logger.info(e.getMessage()+"SQL error");
 				e.printStackTrace();
 			}
 		}

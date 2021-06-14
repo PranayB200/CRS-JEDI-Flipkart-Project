@@ -2,7 +2,7 @@ package com.flipkart.constant;
 
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Enumeration class for Mode of Payments
  *
  */

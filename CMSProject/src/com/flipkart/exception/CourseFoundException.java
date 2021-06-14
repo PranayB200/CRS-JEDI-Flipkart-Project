@@ -4,7 +4,7 @@
 package com.flipkart.exception;
 
 /**
- * @author Rag_Patel
+ * @author JEDI-04-G3
  *
  */
 public class CourseFoundException extends Exception{

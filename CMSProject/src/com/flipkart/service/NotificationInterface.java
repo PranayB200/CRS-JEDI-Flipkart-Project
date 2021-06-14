@@ -7,7 +7,7 @@ import com.flipkart.constant.NotificationType;
 
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Notification logic for sending notifications for multiple events such as
  * 1. Student Registration
  * 2. Registration Approval

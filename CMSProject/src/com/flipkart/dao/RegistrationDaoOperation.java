@@ -27,7 +27,7 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author sameer
+ * @author JEDI-04-G3
  * Class to implement Registration Dao Operations
  * This class communicates with the database.
  *
@@ -338,7 +338,8 @@ public class RegistrationDaoOperation implements RegistrationDaoInterface{
 			stmt.setInt(1, studentId);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			fee = rs.getDouble(1);
+			fee = rs.getInt("totalFees");
+			System.out.println(fee);
 		}
 		catch(SQLException e)
 		{

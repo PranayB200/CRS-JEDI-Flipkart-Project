@@ -13,7 +13,7 @@ import com.flipkart.constant.ModeOfPayment;
 import com.flipkart.exception.CourseNotFoundException;
 
 /**
- * @author JDI-03
+ * @author JEDI-04-G3
  * Interface for Registration DAO Operation
  *
  */

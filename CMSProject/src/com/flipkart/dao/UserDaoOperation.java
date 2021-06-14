@@ -13,7 +13,7 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author sameer
+ * @author JEDI-04-G3
  * Class to implement User Dao Operations
  */
 public class UserDaoOperation implements UserDaoInterface{

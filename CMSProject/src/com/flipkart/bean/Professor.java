@@ -2,7 +2,7 @@ package com.flipkart.bean;
 
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Professor Class
  * 
  */

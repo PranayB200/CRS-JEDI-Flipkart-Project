@@ -1,7 +1,7 @@
 package com.flipkart.constant;
 /**
  * 
- * @author JEDI-03
+ * @author JEDI-04-G3
  * Class storing SQL Queries
  */
 
@@ -17,7 +17,7 @@ public class SQLQueriesConstants {
 	public static final String ASSIGN_COURSE_QUERY = "update Course set professorId = (select professorId from professor where userId = ?) where courseCode = ?";
 	public static final String VIEW_COURSE_QUERY = "select courseCode, courseName, professorId from Course";
 	
-	public static final String ADD_STUDENT="insert into student (userId,branchName,batch,isApproved) values (?,?,?,?)";
+	public static final String ADD_STUDENT="insert into student (userId,branchName,batch,isApproved) values (?,?,?,0)";
 	public static final String VERIFY_CREDENTIALS="select password from user where userId = ?";
 	public static final String GET_ROLE="select role from user where userId = ? ";
 	public static final String IS_APPROVED="select isApproved from student where studentId = ? ";
@@ -34,7 +34,7 @@ public class SQLQueriesConstants {
 	public static final String ADD_COURSE="insert into registeredcourse (studentId,courseCode) values ( ? , ? )";
 	public static final String DROP_COURSE_QUERY = "delete from registeredcourse where courseCode = ? AND studentId = ?;";
 	public static final String INCREMENT_SEAT_QUERY  = "update course set seats = seats + 1 where  courseCode = ?;";
-	public static final String CALCULATE_FEES  = "select sum(courseFee) from course where courseCode in (select courseCode from registeredcourse where studentID = ?);";
+	public static final String CALCULATE_FEES  = "select sum(courseFee) as totalFees from course where courseCode in (select courseCode from registeredcourse where studentId = ?);";
 	public static final String VIEW_GRADE = "select course.courseCode,course.courseName,registeredcourse.grade from course inner join registeredcourse on course.courseCode = registeredcourse.courseCode where registeredcourse.studentId = ?;";	
 	public static final String GET_SEATS = "select seats from course where courseCode = ?;";
 	public static final String INSERT_PAYMENT = "insert into payment(studentId,modeofPayment,referenceId,amount) values(?,?,?,?);";
@@ -42,7 +42,9 @@ public class SQLQueriesConstants {
 	public static final String GET_NOTIFICATION = "select * from notification where referenceId = ?;";
 	public static final String ADD_GRADE="update registeredcourse set Grade=? where courseCode=? and studentId=?";
 	public static final String GET_COURSES="select * from course where professorId in (select professorId from professor where userId = ?)";
-	public static final String GET_REGISTRATION_STATUS=" select isRegistered from student where studentId = ? ";
+	public static final String GET_REGISTRATION_STATUS=" select isApproved from student where studentId = ? ";
 	public static final String SET_REGISTRATION_STATUS="update student set isRegistered = true  where studentId=?";
 	public static final String GET_ENROLLED_STUDENTS="select course.courseCode,course.courseName,registeredcourse.studentId from course inner join registeredcourse on course.courseCode = registeredcourse.courseCode where course.professorId in (select professorId from professor where userId = ?) order by course.courseCode";
+	public static final String GET_IS_REGISTERED="select isRegistered from student where studentId = ?";
+	public static final String SET_IS_REGISTERED="update student set isRegistered = 1 where studentId = ?"; 
 }

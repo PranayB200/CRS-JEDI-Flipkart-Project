@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * 
- * @author JDI-03
+ * @author JEDI-04-G3
  * Interface for Admin Operations
  * 
  */

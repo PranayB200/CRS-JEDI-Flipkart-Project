@@ -2,7 +2,7 @@ package com.flipkart.service;
 
 import java.util.List;
 
-// import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
@@ -17,13 +17,13 @@ import com.flipkart.validator.AdminValidator;
 
 /**
  * 
- * @author JDI-03
+ * @author JEDI-04-G3
  * Implementations of Admin Operations
  * 
  */
 public class AdminOperation implements AdminInterface{
 
-	// private static Logger logger = Logger.getLogger(AdminOperation.class);
+	 private static Logger logger = Logger.getLogger(AdminOperation.class);
 	private static volatile AdminOperation instance = null;
 	
 	private AdminOperation()
@@ -58,7 +58,7 @@ public class AdminOperation implements AdminInterface{
 	@Override
 	public void deleteCourse(String dropCourseCode, List<Course> courseList) throws CourseNotFoundException {
 		if(!AdminValidator.isValidDropCourse(dropCourseCode, courseList)) {
-			System.out.println("courseCode: " + dropCourseCode + " not present in catalog!");
+			logger.error("courseCode: " + dropCourseCode + " not present in catalog!");
 			throw new CourseNotFoundException(dropCourseCode);
 		}
 		try {
@@ -79,7 +79,7 @@ public class AdminOperation implements AdminInterface{
 	public void addCourse(Course newCourse, List<Course> courseList) throws CourseFoundException {
 		
 		if(!AdminValidator.isValidNewCourse(newCourse, courseList)) {
-			System.out.println("courseCode: " + newCourse.getCourseCode() + " already present in catalog!");
+			logger.error("courseCode: " + newCourse.getCourseCode() + " already present in catalog!");
 			throw new CourseFoundException(newCourse.getCourseCode());
 		}
 		try {
@@ -108,7 +108,7 @@ public class AdminOperation implements AdminInterface{
 	public void approveStudent(int studentId, List<Student> studentList) throws StudentNotFoundException {
 		
 		if(!AdminValidator.isValidUnapprovedStudent(studentId, studentList)) {
-			System.out.println("studentId: " + studentId + " is already approvet/not-present!");
+			logger.info("studentId: " + studentId + " is already approvet/not-present!");
 			throw new StudentNotFoundException(studentId);
 		}
 		try {

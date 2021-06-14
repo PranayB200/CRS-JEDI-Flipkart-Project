@@ -16,7 +16,7 @@ import com.flipkart.exception.StudentNotFoundException;
 import com.flipkart.exception.UserNotAddedException;
 
 /**
- * @author JD1-03
+ * @author JEDI-04-G3
  * Interface for Admin Dao Operations
  *
  */

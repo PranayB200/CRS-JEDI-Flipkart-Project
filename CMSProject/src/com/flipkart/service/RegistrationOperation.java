@@ -1,21 +1,31 @@
 package com.flipkart.service;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.UUID;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Notification;
 import com.flipkart.bean.StudentGrade;
 import com.flipkart.constant.ModeOfPayment;
+import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.dao.RegistrationDaoInterface;
 import com.flipkart.dao.RegistrationDaoOperation;
 import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.SeatNotAvailableException;
+import com.flipkart.utils.DBUtils;
 import com.flipkart.validator.StudentValidator;
 
 /**
- * @author JDI-03 The Registration Operation provides the business logic for
+ * @author JEDI-04-G3 
+ * The Registration Operation provides the business logic for
  *         student registration.
  */
 public class RegistrationOperation implements RegistrationInterface {
@@ -110,7 +120,25 @@ public class RegistrationOperation implements RegistrationInterface {
 
 	@Override
 	public double calculateFee(int studentId) throws SQLException {
-		return registrationDaoInterface.calculateFee(studentId);
+		Connection connection=DBUtils.getConnection();
+		PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_IS_REGISTERED);
+		statement.setInt(1, studentId);
+		
+		ResultSet rs = statement.executeQuery();
+		rs.next();
+		int is_registered = rs.getInt(1);
+		if (is_registered == 1) {
+			System.out.println("You have no dues left!");
+			return 0;
+		}
+		
+				
+		double fee = registrationDaoInterface.calculateFee(studentId);
+		PreparedStatement statement2 = connection.prepareStatement(SQLQueriesConstants.SET_IS_REGISTERED);
+		statement2.setInt(1, studentId);
+		
+		statement2.executeUpdate();
+		return fee;
 	}
 
 	/**

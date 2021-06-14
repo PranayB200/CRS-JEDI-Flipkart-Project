@@ -16,7 +16,7 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author sameer
+ * @author JEDI-04-G3
  * Class to implement Notification Dao Operations
  * Used for adding the notification to the database
  *
@@ -97,6 +97,16 @@ public class NotificationDaoOperation implements NotificationDaoInterface{
 	{
 		UUID referenceId;
 		Connection connection=DBUtils.getConnection();
+		PreparedStatement statement0 = connection.prepareStatement(SQLQueriesConstants.GET_IS_REGISTERED);
+		statement0.setInt(1, studentId);
+		
+		ResultSet rs = statement0.executeQuery();
+		rs.next();
+		int is_registered = rs.getInt(1);
+		if (is_registered == 1) {
+			System.out.println("You have no dues left!");
+			return UUID.randomUUID();
+		}
 		try
 		{
 			referenceId=UUID.randomUUID();
@@ -106,6 +116,10 @@ public class NotificationDaoOperation implements NotificationDaoInterface{
 			statement.setString(2, modeOfPayment.toString());
 			statement.setString(3,referenceId.toString());
 			statement.executeUpdate();
+			
+			PreparedStatement statement2 = connection.prepareStatement(SQLQueriesConstants.SET_IS_REGISTERED);
+			statement2.setInt(1, studentId);
+			statement2.executeUpdate();
 			//check if record is added
 		}
 		catch(SQLException ex)

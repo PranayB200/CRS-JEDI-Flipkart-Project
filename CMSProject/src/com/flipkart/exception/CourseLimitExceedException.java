@@ -4,7 +4,7 @@
 package com.flipkart.exception;
 
 /**
- * @author 
+ * @author JEDI-04-G3 
  *
  */
 public class CourseLimitExceedException extends Exception{
