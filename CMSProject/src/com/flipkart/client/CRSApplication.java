@@ -1,7 +1,7 @@
 package com.flipkart.client;
 
 import java.util.Scanner;
-// import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.flipkart.service.UserOperation;
 import com.flipkart.constant.Gender;
@@ -14,14 +14,14 @@ import com.flipkart.service.UserInterface;
 
 /**
  * 
- * @author JEDI-03
+ * @author mehul
  * This class is used as the main entry point of the application
  * In main menu to login, register are displayed
  * 
  */
 public class CRSApplication {
 
-	// // private static Logger logger = Logger.getLogger(CRSApplication.class);
+	private static Logger logger = Logger.getLogger(CRSApplication.class);
 	static boolean loggedin = false;
 	StudentInterface studentInterface=StudentOperation.getInstance();
 	UserInterface userInterface =UserOperation.getInstance();
@@ -53,7 +53,7 @@ public class CRSApplication {
 					crsApplication.updatePassword();
 					break;
 				default:
-					System.out.println("Invalid Input");
+					logger.info("Invalid Input");
 			}
 			createMainMenu();
 			userInput=sc.nextInt();
@@ -61,7 +61,7 @@ public class CRSApplication {
 		}
 		catch(Exception ex)
 		{
-			System.out.println("Error occured "+ex);
+			logger.error("Error occured "+ex);
 		}
 		finally
 		{
@@ -74,12 +74,12 @@ public class CRSApplication {
 	 */
 	public static void createMainMenu()
 	{
-		System.out.println("----------Welcome to Course Management System---------");
-		System.out.println("1. Login");
-		System.out.println("2. Student Registration");
-		System.out.println("3. Update password");
-		System.out.println("4. Exit");
-		System.out.println("Enter user input");
+		logger.info("----------Welcome to Course Management System---------");
+		logger.info("1. Login");
+		logger.info("2. Student Registration");
+		logger.info("3. Update password");
+		logger.info("4. Exit");
+		logger.info("Enter user input");
 	}
 	
 	/**
@@ -96,10 +96,10 @@ public class CRSApplication {
 		String userId,password;
 		try
 		{
-			System.out.println("-----------------Login------------------");
-			System.out.println("Email:");
+			logger.info("-----------------Login------------------");
+			logger.info("Email:");
 			userId=sc.next();
-			System.out.println("Password:");
+			logger.info("Password:");
 			password=sc.next();
 			loggedin = userInterface.verifyCredentials(userId, password);
 			
@@ -107,7 +107,7 @@ public class CRSApplication {
 			//true->role->student->approved
 			if(loggedin)
 			{
-				System.out.println("Logged In!");
+				logger.info("Logged In!");
 				//System.out.println("Welcome "+userId);
 				String role=userInterface.getRole(userId);
 				Role userRole=Role.stringToName(role);
@@ -136,7 +136,7 @@ public class CRSApplication {
 					}
 					else
 					{
-						System.out.println("Failed to login, you have not been approved by the administration!");
+						logger.warn("Failed to login, you have not been approved by the administration!");
 						loggedin=false;
 					}
 					break;
@@ -146,13 +146,13 @@ public class CRSApplication {
 			}
 			else
 			{
-				System.out.println("Invalid Credentials!");
+				logger.error("Invalid Credentials!");
 			}
 			
 		}
 		catch(UserNotFoundException ex)
 		{
-			System.out.println(ex.getUserId()+" not registered!");
+			logger.error(ex.getUserId()+" not registered!");
 		}	
 	}
 	
@@ -169,24 +169,24 @@ public class CRSApplication {
 		try
 		{
 			//input all the student details
-			System.out.println("---------------Student Registration-------------");
-			System.out.println("Name:");
+			logger.info("---------------Student Registration-------------");
+			logger.info("Name:");
 			name=sc.nextLine();
-			System.out.println("Email:");
+			logger.info("Email:");
 			userId=sc.next();
-			System.out.println("Password:");
+			logger.info("Password:");
 			password=sc.next();
-			System.out.println("Gender: \t 1: Male \t 2.Female\t 3.Other");
+			logger.info("Gender: \t 1: Male \t 2.Female\t 3.Other");
 			genderV=sc.nextInt();
 			sc.nextLine();
-			System.out.println("Branch:");
+			logger.info("Branch:");
 			branchName=sc.nextLine();
-			System.out.println("Batch:");
+			logger.info("Batch:");
 			batch=sc.nextInt();
 			sc.nextLine();
-			System.out.println("Address:");
+			logger.info("Address:");
 			address=sc.nextLine();
-			System.out.println("Country");
+			logger.info("Country");
 			country=sc.next();
 			gender=Gender.getName(genderV);
 			studentInterface.register(name, userId, password, gender, batch, branchName, address, country);
@@ -194,7 +194,7 @@ public class CRSApplication {
 		}
 		catch(StudentNotRegisteredException ex)
 		{
-			System.out.println("Something went wrong! "+ex.getStudentName() +" not registered. Please try again");
+			logger.error("Something went wrong! "+ex.getStudentName() +" not registered. Please try again");
 		}
 	}
 	
@@ -207,21 +207,21 @@ public class CRSApplication {
 		String userId,newPassword;
 		try
 		{
-			System.out.println("------------------Update Password--------------------");
-			System.out.println("Email");
+			logger.info("------------------Update Password--------------------");
+			logger.info("Email");
 			userId=sc.next();
-			System.out.println("New Password:");
+			logger.info("New Password:");
 			newPassword=sc.next();
 			boolean isUpdated=userInterface.updatePassword(userId, newPassword);
 			if(isUpdated)
-				System.out.println("Password updated successfully!");
+				logger.info("Password updated successfully!");
 
 			else
-				System.out.println("Something went wrong, please try again!");
+				logger.error("Something went wrong, please try again!");
 		}
 		catch(Exception ex)
 		{
-			System.out.println("Error Occured "+ex.getMessage());
+			logger.error("Error Occured "+ex.getMessage());
 		}
 	}
 }
