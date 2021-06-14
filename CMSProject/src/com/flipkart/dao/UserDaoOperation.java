@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.exception.UserNotFoundException;
@@ -13,12 +13,12 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author JEDI-03
+ * @author sameer
  * Class to implement User Dao Operations
  */
 public class UserDaoOperation implements UserDaoInterface{
 	private static volatile UserDaoOperation instance=null;
-	// private static Logger logger = Logger.getLogger(UserDaoOperation.class);
+	private static Logger logger = Logger.getLogger(UserDaoOperation.class);
 	
 	/**
 	 * Default Constructor
@@ -68,7 +68,7 @@ public class UserDaoOperation implements UserDaoInterface{
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		finally
 		{
@@ -113,7 +113,7 @@ public class UserDaoOperation implements UserDaoInterface{
 		}
 		catch(SQLException ex)
 		{
-			System.out.println("Something went wrong, please try again! "+ ex.getMessage());
+			logger.info("Something went wrong, please try again! "+ ex.getMessage());
 		}
 		finally
 		{
@@ -159,7 +159,7 @@ public class UserDaoOperation implements UserDaoInterface{
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		finally
 		{

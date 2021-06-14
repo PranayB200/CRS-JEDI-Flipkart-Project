@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.flipkart.bean.Student;
 import com.flipkart.client.CRSApplication;
@@ -19,14 +19,14 @@ import com.flipkart.utils.DBUtils;
 
 /**
  * 
- * @author JEDI-03
+ * @author sameer
  * Class to implement Student Dao Operations
  *
  */
 public class StudentDaoOperation implements StudentDaoInterface {
 	
 	private static volatile StudentDaoOperation instance=null;
-	// private static Logger logger = Logger.getLogger(StudentOperation.class);
+	private static Logger logger = Logger.getLogger(StudentOperation.class);
 	
 	/**
 	 * Default Constructor
@@ -124,7 +124,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		
 		return 0;
@@ -142,10 +142,8 @@ public class StudentDaoOperation implements StudentDaoInterface {
 			PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.IS_APPROVED);
 			statement.setInt(1, studentId);
 			ResultSet rs = statement.executeQuery();
-			
-			// To be debugged later.
-//			if(rs.next())
-			if(true)
+			// to be debugged later
+			if(rs.next())
 			{
 				return rs.getBoolean("isApproved");
 			}
@@ -153,7 +151,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		
 		return false;
