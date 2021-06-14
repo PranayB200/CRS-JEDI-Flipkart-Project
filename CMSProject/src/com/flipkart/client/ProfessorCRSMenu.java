@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.EnrolledStudent;
@@ -14,14 +14,14 @@ import com.flipkart.service.ProfessorOperation;
 
 /**
  * 
- * @author JEDI-03
+ * @author mehul
  * Class that display Professor Client Menu
  * 
  */
 public class ProfessorCRSMenu {
 
 	
-	// private static Logger logger = Logger.getLogger(ProfessorCRSMenu.class);
+	private static Logger logger = Logger.getLogger(ProfessorCRSMenu.class);
 	ProfessorInterface professorInterface=ProfessorOperation.getInstance();
 	
 	/**
@@ -37,14 +37,14 @@ public class ProfessorCRSMenu {
 		int input;
 		while(CRSApplication.loggedin)
 		{
-			System.out.println("*****************************");
-			System.out.println("**********Professor Menu*********");
-			System.out.println("*****************************");
-			System.out.println("1. View Courses");
-			System.out.println("2. View Enrolled Students");
-			System.out.println("3. Add grade");
-			System.out.println("4. Logout");
-			System.out.println("*****************************");
+			logger.info("*****************************");
+			logger.info("**********Professor Menu*********");
+			logger.info("*****************************");
+			logger.info("1. View Courses");
+			logger.info("2. View Enrolled Students");
+			logger.info("3. Add grade");
+			logger.info("4. Logout");
+			logger.info("*****************************");
 			
 			//input user
 			input=sc.nextInt();
@@ -68,7 +68,7 @@ public class ProfessorCRSMenu {
 					CRSApplication.loggedin=false;
 					return;
 				default:
-					System.out.println("***** Wrong Choice *****");
+					logger.warn("***** Wrong Choice *****");
 			}
 		}
 		
@@ -86,16 +86,16 @@ public class ProfessorCRSMenu {
 		{
 			List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
 			enrolledStudents=professorInterface.viewEnrolledStudents(profId);
-			System.out.println(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","Student ID" ));
+			logger.info(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","Student ID" ));
 			for(EnrolledStudent obj: enrolledStudents)
 			{
-				System.out.println(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),obj.getStudentId()));
+				logger.info(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),obj.getStudentId()));
 			}
 			
 		}
 		catch(Exception ex)
 		{
-			System.out.println(ex.getMessage()+"Something went wrong, please try again later!");
+			logger.error(ex.getMessage()+"Something went wrong, please try again later!");
 		}
 	}
 
@@ -108,15 +108,15 @@ public class ProfessorCRSMenu {
 		try
 		{
 			List<Course> coursesEnrolled=professorInterface.getCourses(profId);
-			System.out.println(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","NO. ENROLLED" ));
+			logger.info(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","NO. ENROLLED" ));
 			for(Course obj: coursesEnrolled)
 			{
-				System.out.println(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),10- obj.getSeats()));
+				logger.info(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),10- obj.getSeats()));
 			}		
 		}
 		catch(Exception ex)
 		{
-			System.out.println("Something went wrong!"+ex.getMessage());
+			logger.error("Something went wrong!"+ex.getMessage());
 		}
 	}
 	
@@ -130,20 +130,20 @@ public class ProfessorCRSMenu {
 		String courseCode,grade;
 		try
 		{
-			System.out.println("----------------Add Grade--------------");
-			System.out.println("Enter student id");
+			logger.info("----------------Add Grade--------------");
+			logger.info("Enter student id");
 			studentId=sc.nextInt();
-			System.out.println("Enter course code");
+			logger.info("Enter course code");
 			courseCode=sc.next();
-			System.out.println("Enter grade");
+			logger.info("Enter grade");
 			grade=sc.next();
 			professorInterface.addGrade(studentId, courseCode, grade);
-			System.out.println("Grade added successfully for "+studentId);
+			logger.info("Grade added successfully for "+studentId);
 			
 		}
 		catch(GradeNotAddedException ex)
 		{
-			System.out.println("Grade cannot be added for"+ex.getStudentId());
+			logger.error("Grade cannot be added for"+ex.getStudentId());
 			
 		}
 	
