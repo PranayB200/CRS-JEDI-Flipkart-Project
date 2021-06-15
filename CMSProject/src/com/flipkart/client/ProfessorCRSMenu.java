@@ -37,14 +37,14 @@ public class ProfessorCRSMenu {
 		int input;
 		while(CRSApplication.loggedin)
 		{
-			logger.info("*****************************");
-			logger.info("**********Professor Menu*********");
-			logger.info("*****************************");
-			logger.info("1. View Courses");
-			logger.info("2. View Enrolled Students");
-			logger.info("3. Add grade");
-			logger.info("4. Logout");
-			logger.info("*****************************");
+			System.out.println("*****************************");
+			System.out.println("**********Professor Menu*********");
+			System.out.println("*****************************");
+			System.out.println("1. View Courses");
+			System.out.println("2. View Enrolled Students");
+			System.out.println("3. Add grade");
+			System.out.println("4. Logout");
+			System.out.println("*****************************");
 			
 			//input user
 			input=sc.nextInt();
@@ -86,10 +86,10 @@ public class ProfessorCRSMenu {
 		{
 			List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
 			enrolledStudents=professorInterface.viewEnrolledStudents(profId);
-			logger.info(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","Student ID" ));
+			System.out.println(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","Student ID" ));
 			for(EnrolledStudent obj: enrolledStudents)
 			{
-				logger.info(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),obj.getStudentId()));
+				System.out.println(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),obj.getStudentId()));
 			}
 			
 		}
@@ -108,10 +108,10 @@ public class ProfessorCRSMenu {
 		try
 		{
 			List<Course> coursesEnrolled=professorInterface.getCourses(profId);
-			logger.info(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","NO. ENROLLED" ));
+			System.out.println(String.format("%20s %20s %20s","COURSE CODE","COURSE NAME","NO. ENROLLED" ));
 			for(Course obj: coursesEnrolled)
 			{
-				logger.info(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),10- obj.getSeats()));
+				System.out.println(String.format("%20s %20s %20s",obj.getCourseCode(), obj.getCourseName(),10- obj.getSeats()));
 			}		
 		}
 		catch(Exception ex)
@@ -130,15 +130,15 @@ public class ProfessorCRSMenu {
 		String courseCode,grade;
 		try
 		{
-			logger.info("----------------Add Grade--------------");
-			logger.info("Enter student id");
+			System.out.println("----------------Add Grade--------------");
+			System.out.println("Enter student id");
 			studentId=sc.nextInt();
-			logger.info("Enter course code");
+			System.out.println("Enter course code");
 			courseCode=sc.next();
-			logger.info("Enter grade");
+			System.out.println("Enter grade");
 			grade=sc.next();
 			professorInterface.addGrade(studentId, courseCode, grade);
-			logger.info("Grade added successfully for "+studentId);
+			System.out.println("Grade added successfully for "+studentId);
 			
 		}
 		catch(GradeNotAddedException ex)
