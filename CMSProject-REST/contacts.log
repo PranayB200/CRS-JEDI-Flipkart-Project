@@ -1,0 +1,5 @@
+12:28:57,722  INFO AdminDaoOperation,main:341 - 3 courses in catalogId: 1
+12:29:17,954 ERROR AdminDaoOperation,main:121 - Parameter index out of range (3 > number of parameters, which is 2).
+12:31:55,122  INFO AdminDaoOperation,main:340 - 3 courses in catalogId: 1
+12:31:58,754  INFO AdminDaoOperation,main:111 - 1 course added
+12:31:58,755  INFO AdminDaoOperation,main:116 - Course with Course ID : 205 is added to Catalogue
